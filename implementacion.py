@@ -134,3 +134,4 @@ def string2Tree(A):
 def regla_final(regla1, regla2):
     return Tree("Y", regla1, regla2)
 
+
