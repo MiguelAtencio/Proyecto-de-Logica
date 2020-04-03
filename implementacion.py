@@ -59,7 +59,6 @@ def sub_regla1():
     return letrap
 
 
-#B28
 
 def sub_regla2():
     #Cada estado de atributo solo pertenece a una persona
