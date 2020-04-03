@@ -1,6 +1,22 @@
 import random 
 rn1 = random.Random()
 
+
+def V1(f):
+
+    if f.right == None:
+        return LetrasProposicionales[f.label]
+
+    elif f.label == "-":
+        return 1 - V1(f.right)
+    
+    elif f.label == "Y":
+        return V1(f.left) * V1(f.right)
+    
+    elif f.label == "O":
+        return max(V1(f.left), V1(f.right))
+
+
 def Inorder(f):
     # Imprime una formula como cadena dada una formula como arbol
     # Input: tree, que es una formula de logica proposicional
