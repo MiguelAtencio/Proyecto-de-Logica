@@ -115,5 +115,6 @@ def string2Tree(A):
 
     return Pila[-1]
 
-
+def regla_final(regla1, regla2):
+    return Tree("Y", regla1, regla2)
 
