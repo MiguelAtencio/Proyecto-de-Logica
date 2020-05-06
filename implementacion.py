@@ -49,6 +49,17 @@ for i in letras:
             LetrasProposicionales[a] = rn1.randrange(0, 2)
             a = ""
 
+LETRAS = []
+a = ''
+for i in letras:
+    for x in range(0, 10):
+        for j in range(0, 10):
+            a += i + str(x) + str(j)
+            LETRAS.append(a)
+            a = ""
+
+
+
 def sub_regla1():
     #Cada persona solo tiene un estado atributo
     letrap = ""
@@ -56,7 +67,7 @@ def sub_regla1():
     for f in range(0,10):
         sele = []
         for j in LetrasProposicionales:
-            if j[0] in letras and j[1] == str(f):
+            if j[1] == str(f):
                 sele.append(j)
 
         for h in range(0,len(sele)):
@@ -75,63 +86,53 @@ def sub_regla1():
     return letrap
 
 
-
+        
 def sub_regla2():
-    #Cada estado de atributo solo pertenece a una persona
-
-    letrap = ""
-
-    for f in range(0,10):
-        sele = []
-        for x in range(0, 10):
-            for j in LetrasProposicionales:
-                if j[1:] == str(f) + str(x):
-                    sele.append(j)
-
-        for h in range(0,len(sele)):
-            el = sele[h]
-
-            for i in range(0,len(sele)):
-                if sele[i] == el:
-                    letrap += el
-
-                else:
-                    letrap += sele[i]+'-'
-            letrap += (len(sele)-1)*'Y'
-        letrap += (len(sele)-1)*'O'
+    letrap = ''
+    for i in range(0, 10):
+        for h in range(0, 10):
+            for x in range(0, 10):
+                for j in letras:
+                    if j == letras[x]:
+                        letrap += j + str(i) + str(h)
+                    else:
+                        letrap += j + str(i) + str(h) + '-'
+                    
+                letrap += 9*'Y'
+            letrap += 9*'O'
+        letrap += 9*'Y'
     letrap += 9*'Y'
-
+    #print(letrap)
     return letrap
 
-                
 
-def string2Tree(A):
-    #Crea un arbol apartir de un string en inversa polaca
-    
+def StringToTree(A):
     Conectivos = ['O','Y']
-    Pila = []
-    c = 0
-    while c <= len(A) - 3: 
-        if A[c] + A[c+1] + A[c+2] in LetrasProposicionales:
-            Pila.append(Tree(A[c] + A[c+1] + A[c+2], None, None))
-            c += 3
-
+    stack = []
+    for c in range(len(A)):
+        if c + 2 < len(A)-1 and A[c] + A[c+1] + A[c+2] in LETRAS:
+            aux = Tree(A[c] + A[c+1] + A[c+2], None, None)
+            stack.append(aux)
         elif A[c] == '-':
-            FormulaAux = Tree(A[c], None, Pila[-1])
-            del Pila[-1]
-            Pila.append(FormulaAux)
-            c += 1
-
+            aux = Tree(A[c], None, stack[-1])
+            del stack[-1]
+            stack.append(aux)
         elif A[c] in Conectivos:
-            FormulaAux = Tree(A[c], Pila[-1], Pila[-2])
-            del Pila[-1]
-            del Pila[-1]
-            Pila.append(FormulaAux)
-            c += 1
+            aux = Tree(A[c], stack[-2], stack[-1])
+            del stack[-1]
+            del stack[-1]
+            stack.append(aux)
 
-    return Pila[-1]
+    return stack[-1]
+
+
+
 
 def regla_final(regla1, regla2):
     return Tree("Y", regla1, regla2)
+
+
+if __name__ == "__main__":
+    print(StringToTree(sub_regla2()))
 
 
