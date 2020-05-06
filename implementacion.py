@@ -49,15 +49,6 @@ for i in letras:
             LetrasProposicionales[a] = rn1.randrange(0, 2)
             a = ""
 
-LETRAS = []
-a = ''
-for i in letras:
-    for x in range(0, 10):
-        for j in range(0, 10):
-            a += i + str(x) + str(j)
-            LETRAS.append(a)
-            a = ""
-
 
 
 def sub_regla1():
@@ -110,7 +101,7 @@ def StringToTree(A):
     Conectivos = ['O','Y']
     stack = []
     for c in range(len(A)):
-        if c + 2 < len(A)-1 and A[c] + A[c+1] + A[c+2] in LETRAS:
+        if c + 2 < len(A)-1 and A[c] + A[c+1] + A[c+2] in LetrasProposicionales:
             aux = Tree(A[c] + A[c+1] + A[c+2], None, None)
             stack.append(aux)
         elif A[c] == '-':
