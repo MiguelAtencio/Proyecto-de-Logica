@@ -124,7 +124,6 @@ def regla_final(regla1, regla2):
 
 
 if __name__ == "__main__":
-    if __name__ == "__main__":
     #print(StringToTree(sub_regla2()))
     for x in range(0, 10):
         for i in range(0, 10):
