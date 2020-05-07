@@ -46,7 +46,7 @@ for i in letras:
     for x in range(0, 10):
         for j in range(0, 10):
             a += i + str(x) + str(j)
-            LetrasProposicionales[a] = rn1.randrange(0, 2)
+            LetrasProposicionales[a] = 0
             a = ""
 
 
