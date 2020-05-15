@@ -96,6 +96,29 @@ def sub_regla2():
     #print(letrap)
     return letrap
 
+def sub_regla2FNC():
+    letrap = ''
+    for i in range(0, 10):
+        letrap += '('
+        for h in range(0, 10):
+            letrap += '('
+            for x in range(0, 10):
+                letrap += '('
+                for j in letras:
+                    if j == letras[x]:
+                        letrap += j + str(i) + str(h) 
+                    else:
+                        letrap += '-' + j + str(i) + str(h)
+                    if j != 'B':
+                        letrap += 'Y'
+                if x != 9: letrap += ')O'
+                else: letrap += ')'
+            if h != 9: letrap += ')Y'
+            else: letrap += ')'
+        if i != 9: letrap += ')Y'
+        else: letrap += ')'
+    print(letrap)
+    return letrap
 
 def StringToTree(A):
     Conectivos = ['O','Y']
