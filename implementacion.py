@@ -109,7 +109,7 @@ def sub_regla2FNC():
                         letrap += j + str(i) + str(h) 
                     else:
                         letrap += '-' + j + str(i) + str(h)
-                    if j != 'B':
+                    if j != 'J':
                         letrap += 'Y'
                 if x != 9: letrap += ')O'
                 else: letrap += ')'
