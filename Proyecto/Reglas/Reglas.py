@@ -1,18 +1,13 @@
-import sys
-sys.path.append('../')
-
 import FNC.FNC as fn
 import DPLL.DPLL as dp
 import Codificacion.Codificacion as cf
 import Tree.Tree as t
 
-import time
+Nf = 9 # numero de personas
+Nc = 9 # numero de atributos
+No = 9 #numero de estados por atributo
 
-
-Nf = 9
-Nc = 9
-No = 9
-
+#se codifican las letras proposicionales de acuerdo al numero de atributos a usar
 letrasProposicionales = []
 for i in range(Nf):
     for x in range(Nc):
@@ -21,6 +16,7 @@ for i in range(Nf):
             letrasProposicionales.append(chr(256 + v2))
 
 
+ #se crea la regla 1
 def subregla1NC(Nf,Nc,No):
     regla1=""
     for k in range(0,Nf): #Nfilas->nacionalidad
@@ -41,9 +37,9 @@ def subregla1NC(Nf,Nc,No):
             regla1+=(len(litt)-1)*"O"
         regla1+=(Nc-1)*"Y"
     regla1+=(Nf-1)*"Y"
-    #print(regla1)
     return regla1
 
+# se crea la regla 2
 def sub_regla2NC(Nf, Nc, No):
     letrap=""
     for k in range(0,Nf): #Nfilas->nacionalidad
@@ -65,31 +61,10 @@ def sub_regla2NC(Nf, Nc, No):
             letrap+=(len(litt)-1)*"O"
         letrap+=(Nc-1)*"Y"
     letrap+=(Nf-1)*"Y"
-    #print(letrap)
     return letrap
 
 
-def sub_regla2(Nf,Nc,No):
-    letrap = ''
-    for i in range(Nf):
-        for h in range(Nc):
-            for x in range(No):
-                for j in range(Nf):
-                    if j == x:
-                        a = cf.codifica3(j, i, h, Nf, Nc, No)
-                        a = chr(a+256)
-                        letrap += '{}'.format(a)
-                    else:
-                        a = cf.codifica3(j, i, h, Nf, Nc, No)
-                        a = chr(a+256)
-                        letrap += '{}-'.format(a)
-                letrap += (Nf-1)*'Y'
-            letrap += (Nc-1)*'O'
-    letrap += (No-1)*'Y'
-    return letrap
-
-
-
+# se crea la regla final como la conjuncion de las dos subreglas
 def regla_final(regla1, regla2):
     a = t.StringToTree(regla1)
     b = t.StringToTree(regla2)
@@ -97,16 +72,9 @@ def regla_final(regla1, regla2):
 
 
 if __name__ == '__main__':
-    
-    
-    t1 = time.time()
-
+ 
     R1=subregla1NC(Nf,Nc,No)
-    #tR1=t.StringToTree(R1)
-    #TR1=str(tR1)
     R2 = sub_regla2NC(Nf, Nc, No)
-    #tR2 = t.StringToTree(R2)
-    #TR2 = str(tR2)
     RF = regla_final(R1, R2)
 
     TRF = str(RF)
@@ -129,12 +97,9 @@ if __name__ == '__main__':
             else:
                 I2[j]=0
 
-    print(len(I2))
+    #print(len(I2))
+    # aqui se imprime la interpretacion que encuentra el programa, es decir una solucion al problema
     print(I2)
-    t2 = time.time()
-    tf = t2 - t1
-    tf /= 60
-    print(tf, 'min')
 
 
 
