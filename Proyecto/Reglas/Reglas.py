@@ -84,7 +84,7 @@ if __name__ == '__main__':
     #pasando a forma clausal
     hk=fn.formaClausal(teis)
     #se ingresa al DPLL (este genera una interpretacion para la formula de Tseitin, pero se sabe que dicha interpretacion tambien
-    #es modelo de TRF
+    #es modelo de TRF)
     S,I=dp.DPLL(hk,{})
     #ii es una lista con las letras proposicionales de la interpretacion I
     ii=list(I.keys())
