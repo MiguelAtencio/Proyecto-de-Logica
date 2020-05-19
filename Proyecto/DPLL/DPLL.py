@@ -40,7 +40,7 @@ def DPLL(S, I):
         if new_clause not in new_S and new_clause:
             new_S.append(new_clause)
 
-    if l[0] == '-':
+    if len(l)>1:
         I[lcomp] = 0
     else:
         I[l] = 1 
@@ -61,7 +61,7 @@ def DPLL(S, I):
                         new_clause.append(x)
             if new_clause not in new_Sv2 and new_clause:
                 new_Sv2.append(new_clause)
-        if l[0] == '-':
+        if len(l)>1:
             I[lcomp] = 1
         else:
             I[l] = 0 
